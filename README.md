@@ -159,6 +159,103 @@ visuels.
 | Vrai             | Vrai         | Faux                                   | N/A                            | Pas de transformation                        |
 | Vrai             | Vrai         | Vrai                                   | Faux                           | Pas de transformation                        |
 
-**DiagrammedeCasd’utilisation:**
+# Diagramme de cas d'utilisation:
 
-![Diagramme de cas d'utilisation](file:///C:/Users/ASUS/Desktop/Peinture/Diagrammes/cas%20utilisation)
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/cas%20utilisation.png)
+
+# Diagramme de sequence 1:
+
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/seq1.png)
+
+# Diagramme de sequence 2:
+
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/seq2.svg)
+
+# Diagramme de sequence 3:
+
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/seq3.svg)
+
+# Diagramme de Classe:
+
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/classe.svg)
+
+# Diagramme de conception detaillé:
+
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/conception%20detaill%C3%A9.svg)
+
+# Diagramme de machine d'etat:
+
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/etat.svg)
+
+# Diagramme de classe raffinée:
+
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/classe%20raffine.svg)
+
+## Invariant pour la classe Calque:
+
+L'invariant de la classe Calque peut être exprimé en logique propositionnelle de la
+manière suivante :
+
+- Opacité : 0 <= opacité <= 1
+- Visibilité : visible == True ou visible == False
+- Contenu : contenu n'est pas None
+- Initialisation correcte : nom n'est pas None et nom != ""
+
+Ainsi, l'invariant pour la classe Calque peut être exprimé comme suit :
+
+(0 <= opacité <= 1) ∧
+
+(visible == True ∨ visible == False) ∧
+(contenu n'est pas None) ∧
+(nom n'est pas None ∧ nom != "")
+(0 <= opacité <= 1) ∧
+
+Cet invariant garantit que la classe Calque maintient un état correct à tout moment.
+
+## Tables de décision pour les tests unitaires
+
+**Opération 1 : fusionner(autre: Calque)**
+Construisons la table de décision pour l'opération fusionner de la classe Calque.
+Cette méthode fusionne le calque courant avec un autre calque (autre).
+La table prendra en compte les conditions suivantes et les résultats attendus :
+
+- Préconditions :
+  - Les calques this et autre doivent être visibles (visible == True).
+  - L'opacité des deux calques doit être dans la plage valide [0,1].
+- Postconditions :
+  - Un nouveau calque est renvoyé, représentant l'état fusionné de this et
+    autre.
+  - L'opacité du nouveau calque est une valeur valide (moyenne de
+    this.opacité et autre.opacité).
+  - Le nouveau calque est visible si this et autre sont visibles.
+
+| Cas de test | this.visible | autre.visible | this.opacité | autre.opacité | Résultat attendu |
+| ----------- | ------------ | ------------- | ------------ | ------------- | ---------------- |
+| 1           | True         | True          | 0.5          | 0.5           | Succès           |
+| 2           | False        | True          | 0.5          | 0.5           | Exception        |
+| 3           | True         | False         | 0.5          | 0.5           | Exception        |
+| 4           | True         | True          | -0.1         | 0.5           | Exception        |
+| 5           | True         | True          | 0.5          | 1.1           | Exception        |
+
+**Opération 2 : dupliquer()**
+
+Construisons la table de décision pour l'opération dupliquer de la classe Calque.
+Cette méthode duplique le calque courant et renvoie un nouveau calque avec des
+attributs identiques.
+La table prendra en compte les conditions suivantes et les résultats attendus :
+
+- Préconditions :
+  o Le calque doit être visible (visible == True).
+  o L'opacité doit être dans la plage valide [0,1].
+- Postconditions :
+  o Un nouveau calque est renvoyé, représentant une copie identique du
+  calque courant.
+  o L'opacité du nouveau calque est identique à this.opacité.
+  o La visibilité du nouveau calque est identique à this.visible.
+
+| Cas de test | this.visible | this.opacité | Résultat attendu |
+| ----------- | ------------ | ------------ | ---------------- |
+| 1           | True         | 0.5          | Succès           |
+| 2           | False        | 0.5          | Exception        |
+| 3           | True         | 1.1          | Exception        |
+| 4           | True         | -0.1         | Exception        |
