@@ -212,6 +212,8 @@ Ainsi, l'invariant pour la classe Calque peut être exprimé comme suit :
 
 Cet invariant garantit que la classe Calque maintient un état correct à tout moment.
 
+![Cat](https://github.com/takwajlassi/Peinture/blob/main/Diagrammes/invariant.svg)
+
 ## Tables de décision pour les tests unitaires
 
 **Opération 1 : fusionner(autre: Calque)**
